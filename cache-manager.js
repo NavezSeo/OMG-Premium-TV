@@ -5,18 +5,16 @@ const fs = require('fs');
 const path = require('path');
 
 class CacheManager extends EventEmitter {
-    constructor(config) {
+    constructor() {
         super();
         this.transformer = new PlaylistTransformer();
-        this.config = config;
+        this.config = null;
         this.cache = null;
         this.pollingInterval = null;
         this.lastFilter = null;
         this.db = null;
         this.dbPath = path.join(__dirname, 'data', 'cache.db');
-        this.initializeDatabase();
-        this.loadCacheFromDB();
-        this.startPolling();
+        // Database initialization and loading moved to module exports
     }
 
     async initializeDatabase() {
